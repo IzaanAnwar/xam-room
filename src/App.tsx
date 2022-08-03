@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
+import AnswerSheet from './AnswerSheet';
 import SubjectPage from './SubjectPage';
 
 const App = () => {
     return (
         <>
-            <nav className="flex justify-between items-center px-2 text-gray-800">
+            <nav className="flex justify-between items-center px-2 text-gray-800 bg-slate-400 py-2">
                 <h1>Xam corner</h1>
 
                 <div className="">
@@ -17,32 +18,42 @@ const App = () => {
                 <Route
                     path="/"
                     element={
-                        <div className="p-2 mt-8">
+                        <div className="p-2 mt-8 ">
                             <h1 className="text-xl">SEMESTERS</h1>
-                            <div className="flex flex-col justify-between py-4">
-                                <a className="py-2" href="/sem1">
+                            <div className="flex flex-col justify-between py-4 text-cyan-900">
+                                <a className="py-2" href="/1">
                                     Semseter 1
                                 </a>
-                                <a className="py-2" href="/sem2">
+                                <Link className="py-2" to="/2">
                                     Semseter 2
-                                </a>
-                                <a className="py-2" href="/sem3">
+                                </Link>
+                                <a className="py-2" href="/3">
                                     Semseter 3
                                 </a>
-                                <a className="py-2" href="/sem4">
+                                <Link className="py-2" to="/4">
                                     Semseter 4
-                                </a>
-                                <a className="py-2" href="/sem5">
+                                </Link>
+                                <a className="py-2" href="/5">
                                     Semseter 5
                                 </a>
-                                <a className="py-2" href="/sem6">
+                                <a className="py-2" href="/6">
                                     Semseter 6
                                 </a>
                             </div>
                         </div>
                     }
                 />
-                <Route path="/sem:_id/" element={<SubjectPage />} />
+                <Route path="/:sem" element={<SubjectPage />}>
+                    <Route path=":subject" element={<AnswerSheet />} />
+                </Route>
+                <Route
+                    path="*"
+                    element={
+                        <div className=" flex justify-center items-center w-full h-[25vh] bg-red-200 text-red-600">
+                            <h1>Not Found!</h1>
+                        </div>
+                    }
+                />
             </Routes>
         </>
     );
